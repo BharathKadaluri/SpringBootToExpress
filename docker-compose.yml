@@ -1,0 +1,21 @@
+version: "3"
+services:
+  product:
+    image: product-service
+    ports:
+      - "8080:8080"
+    networks:
+      - product-mysql
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+    image: library/mysql:5.7
+    networks:
+      - product-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=productdb
+
+networks:
+  product-mysql:
